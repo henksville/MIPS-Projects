@@ -19,7 +19,9 @@
 							 lb $a2, 0($t0)										# retrieve string current value
 							 jal DeciConverter								# Perform jump to get current decimal value in subroutine
 							 add $t3, $t3, $v1								# Performs sums conversion and adds values
-
+							 beq $t1, $t4, Printsum						# Prints sum, if counter is at final string.
+							 addi $t1, $t1, 1									# increases counter by one
+							 j Loop														# Start over
 
 
 
@@ -30,14 +32,19 @@
 
 							add $t6, $zero, $a2								# line duplicates values in reg $a2 to reg $t6
 							addi $t5, $zero, 87								# ASCII reference value of 87 for lowercase characters loaded to temporary reg $t5
-							bgt $t6, 'x' Exit0								# If statement for current value greater than 'x', return to output
-							bge $t6, 'a' Exit1								# If statement for current value between 'a' and 'x'
+							bgt $t6, 'x', Exit0								# If statement for current value greater than 'x', return to output
+							bge $t6, 'a', Exit1								# If statement for current value between 'a' and 'x'
 
 							addi $t5, $zero, 55								# ASCII reference value of 55 for uppercase characters loaded to temporary reg $t5
-							bgt $t6, 'X' Exit0								# If statement for current value greater than 'X', return to output
-							bge $t6, 'A' Exit1								# If statement for current value between 'A' and 'X'
+							bgt $t6, 'X', Exit0								# If statement for current value greater than 'X', return to output
+							bge $t6, 'A', Exit1								# If statement for current value between 'A' and 'X'
 
 							addi $t5, $zero, 48								# ASCII reference value of 55 for decimal integers loaded to temporary reg $t5
-							bgt $t6, '9' Exit0								# If statement for current value greater than '9', return to output
-							bge $t6, '0' Exit1								# If statement for current value between '0' and '9'
-							bge $t6, '0' Exit0								# While characters are out of all range converts to '0'
+							bgt $t6, '9', Exit0								# If statement for current value greater than '9', return to output
+							bge $t6, '0', Exit1								# If statement for current value between '0' and '9'
+							bge $t6, '0', Exit0								# While characters are out of all range converts to '0'
+
+						Exit0:
+						# Line exits and return 0 value in $v1
+						add $v1, $zero, $zero								# constant loads 0 to reg $v1
+						
