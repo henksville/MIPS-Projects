@@ -46,5 +46,10 @@
 
 						Exit0:
 						# Line exits and return 0 value in $v1
-						add $v1, $zero, $zero								# constant loads 0 to reg $v1
-						
+							add $v1, $zero, $zero								# constant loads 0 to reg $v1
+							jr $ra															# jumps returns $v1 value
+
+						Exit1:
+						# Line exit and returns the calculated value of character to $v1
+							sub $v1, $t6, $t5									# Perform subtraction of value in $t5 from $t6
+							jr $ra														# jumps returns $v1 value
