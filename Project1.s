@@ -39,7 +39,7 @@
 							bgt $t6, 'X', Exit0								# If statement for current value greater than 'X', return to output
 							bge $t6, 'A', Exit1								# If statement for current value between 'A' and 'X'
 
-							addi $t5, $zero, 48								# ASCII reference value of 55 for decimal integers loaded to temporary reg $t5
+							addi $t5, $zero, 48								# ASCII reference value of 48 for decimal integers loaded to temporary reg $t5
 							bgt $t6, '9', Exit0								# If statement for current value greater than '9', return to output
 							bge $t6, '0', Exit1								# If statement for current value between '0' and '9'
 							bge $t6, '0', Exit0								# While characters are out of all range converts to '0'
@@ -58,4 +58,9 @@
 						# Line prints sum of the decimal values
 							li $v0, 1													# Makes system call for printing sum integers
 							or $a0, $t3, $zero								# function loads to register
+							syscall
+							j Exit
+
+						Exit:
+							li $v0, 10												# Read limit of range 10 value
 							syscall
