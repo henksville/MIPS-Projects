@@ -1,6 +1,6 @@
 .data
 			user_input: .space 11 	#This instruction creates space for 10 characters including spaces
-
+.globl main
 .text
 	main:
             li $v0, 8                           # instruction get input from user
@@ -23,22 +23,24 @@
 							 addi $t1, $t1, 1									# increases counter by one
 							 j Loop														# Start over
 
-
-
 						DeciConverter:
 						# Performs conversion using my Howard ID = 02826194 with formula N = 26 + (X % 11) where N = 34.
 						# With M = N - 10 calculation shows M = 24 considered to be my range, value = (A &'a' to X &'x')
 						# Range = (0 to 9) to equal (0 to 9) Range = (A &'a' to X &'x') to equal (10 to 33)
 
 							add $t6, $zero, $a2								# line duplicates values in reg $a2 to reg $t6
+
+						# Computes the Ascii calculation for lowercase character 'a' to 'x'.
 							addi $t5, $zero, 87								# ASCII reference value of 87 for lowercase characters loaded to temporary reg $t5
 							bgt $t6, 'x', Exit0								# If statement for current value greater than 'x', return to output
 							bge $t6, 'a', Exit1								# If statement for current value between 'a' and 'x'
 
+						# Computes the Ascii calculation for uppercase character 'A' to 'Z'.
 							addi $t5, $zero, 55								# ASCII reference value of 55 for uppercase characters loaded to temporary reg $t5
 							bgt $t6, 'X', Exit0								# If statement for current value greater than 'X', return to output
 							bge $t6, 'A', Exit1								# If statement for current value between 'A' and 'X'
 
+						# Computes the Ascii calculation for Decimal value characters '9' to '0' and final value'0'.
 							addi $t5, $zero, 48								# ASCII reference value of 48 for decimal integers loaded to temporary reg $t5
 							bgt $t6, '9', Exit0								# If statement for current value greater than '9', return to output
 							bge $t6, '0', Exit1								# If statement for current value between '0' and '9'
