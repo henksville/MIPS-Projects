@@ -27,4 +27,9 @@
 						# Range = (0 to 9) to equal (0 to 9) Range = (A &'a' to X &'x') to equal (10 to 33)
 
 							add $t6, $zero, $a2								# line duplicates values in reg $a2 to reg $t6
-							addi $t5, $zero, 87								# ASCII ref value of 87 loaded to temporary reg $t5
+							addi $t5, $zero, 87								# ASCII reference value of 87 for lowercase characters loaded to temporary reg $t5
+							bgt $t6, 'x' Exit0								# If statement for current value greater than 'x', return to output
+							bge $t6, 'a' Exit1								# If statemenr for current value between 'a' and 'x'
+							addi $t5, $zero, 55								# ASCII reference value of 55 for uppercase characters loaded to temporary reg $t5
+							bgt $t6, 'X' Exit0								# If statement for current value greater than 'X', return to output
+							bge $t6, 'A' Exit1								# If statemenr for current value between 'A' and 'X'
