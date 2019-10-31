@@ -53,3 +53,9 @@
 						# Line exit and returns the calculated value of character to $v1
 							sub $v1, $t6, $t5									# Perform subtraction of value in $t5 from $t6
 							jr $ra														# jumps returns $v1 value
+
+						Printsum:
+						# Line prints sum of the decimal values
+							li $v0, 1													# Makes system call for printing sum integers
+							or $a0, $t3, $zero								# function loads to register
+							syscall
